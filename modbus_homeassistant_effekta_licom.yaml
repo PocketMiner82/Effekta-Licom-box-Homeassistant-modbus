@@ -1,0 +1,134 @@
+modbus:
+  name: Effekta
+  type: serial
+  method: rtu
+  port: /dev/ttyUSB0
+  baudrate: 19200
+  stopbits: 1
+  bytesize: 8
+  parity: N
+  timeout: 1
+  message_wait_milliseconds: 50
+  sensors:
+    # - name: Effekta Protocol ID
+    #   data_type: string
+    #   slave: 1
+    #   address: 992
+    #   scan_interval: 15
+    - name: Effekta Inverter Modus
+      data_type: string
+      slave: 1
+      address: 208
+      scan_interval: 15
+    - name: Effekta Netzspannung
+      unit_of_measurement: V
+      data_type: int16
+      scale: 0.1
+      precision: 1
+      slave: 1
+      address: 209
+      scan_interval: 15
+    - name: Effekta Netzfrequenz
+      unit_of_measurement: Hz
+      data_type: int16
+      scale: 0.1
+      precision: 1
+      slave: 1
+      address: 213
+      scan_interval: 15
+    - name: Effekta Ausgangsspannung
+      unit_of_measurement: V
+      data_type: int16
+      scale: 0.1
+      precision: 1
+      slave: 1
+      address: 216
+      scan_interval: 15
+    - name: Effekta Ausgangsleistung
+      unit_of_measurement: kW
+      data_type: int32
+      scale: 0.001
+      precision: 3
+      slave: 1
+      address: 217
+      scan_interval: 15
+    - name: Effekta Ausgangsfrequenz
+      unit_of_measurement: Hz
+      data_type: int16
+      scale: 0.1
+      precision: 1
+      slave: 1
+      address: 219
+      scan_interval: 15
+    - name: Effekta Ausgangslast
+      unit_of_measurement: "%"
+      data_type: int16
+      scale: 1
+      precision: 0
+      slave: 1
+      address: 221
+      scan_interval: 15
+    - name: Effekta PBUS Spannung
+      unit_of_measurement: V
+      data_type: int16
+      scale: 1
+      precision: 0
+      slave: 1
+      address: 222
+      scan_interval: 15
+    - name: Effekta Ausgangsscheinleistung
+      unit_of_measurement: kVA
+      data_type: int32
+      scale: 0.001
+      precision: 3
+      slave: 1
+      address: 389
+      scan_interval: 15
+    - name: Effekta Akku Spannung
+      unit_of_measurement: V
+      data_type: int16
+      scale: 0.01
+      precision: 1
+      slave: 1
+      address: 224
+      scan_interval: 15
+    - name: Effekta Akku Ladezustand
+      unit_of_measurement: "%"
+      data_type: int16
+      scale: 1
+      precision: 0
+      slave: 1
+      address: 226
+      scan_interval: 15
+    - name: Effekta Akku Ladestrom
+      unit_of_measurement: A
+      data_type: int16
+      scale: 0.1
+      precision: 1
+      slave: 1
+      address: 227
+      scan_interval: 15
+    - name: Effekta PV Eingangsspannung
+      unit_of_measurement: V
+      data_type: int16
+      scale: 0.1
+      precision: 1
+      slave: 1
+      address: 234
+      scan_interval: 15
+    - name: Effekta PV Eingangsstrom
+      unit_of_measurement: A
+      data_type: int16
+      scale: 1
+      precision: 0
+      slave: 1
+      address: 295
+      scan_interval: 15
+    - name: Effekta Akku Entladestrom
+      unit_of_measurement: A
+      data_type: int32
+      scale: 1
+      precision: 0
+      slave: 1
+      address: 297
+      scan_interval: 15
