@@ -71,8 +71,8 @@ modbus:
     - name: Effekta PBUS Spannung
       unit_of_measurement: V
       data_type: int16
-      scale: 1
-      precision: 0
+      scale: 0.01
+      precision: 2
       slave: 1
       address: 222
       scan_interval: 15
@@ -103,8 +103,8 @@ modbus:
     - name: Effekta Akku Ladestrom
       unit_of_measurement: A
       data_type: int16
-      scale: 0.1
-      precision: 1
+      scale: 1
+      precision: 0
       slave: 1
       address: 227
       scan_interval: 15
@@ -115,6 +115,14 @@ modbus:
       precision: 1
       slave: 1
       address: 234
+      scan_interval: 15
+    - name: Effekta PV Eingangsleistung
+      unit_of_measurement: kW
+      data_type: int16
+      scale: 0.001
+      precision: 3
+      slave: 1
+      address: 785
       scan_interval: 15
     - name: Effekta PV Eingangsstrom
       unit_of_measurement: A
