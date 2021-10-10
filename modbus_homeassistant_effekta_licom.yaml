@@ -1,5 +1,5 @@
 modbus:
-  name: Effekta
+- name: PV
   type: serial
   method: rtu
   port: /dev/ttyUSB0
@@ -7,20 +7,46 @@ modbus:
   stopbits: 1
   bytesize: 8
   parity: N
-  timeout: 1
+  timeout: 2
+  retries: 5
+  retry_on_empty: true
   message_wait_milliseconds: 50
   sensors:
-    # - name: Effekta Protocol ID
+    # 0: USB
+    # 1: SUB
+    # 2: SBU
+    # can be written to (you need to write a single register inside a list, DON'T use just a single value)
+    - name: pv_int_priority_output
+      data_type: int16
+      scale: 1
+      precision: 0
+      slave: 1
+      address: 1479
+      scan_interval: 15
+    # 0: Utility
+    # 1: Solar first
+    # 2: Utility and Solar
+    # 3: Solar only
+    # can be written to (you need to write a single register inside a list, DON'T use just a single value)
+    - name: pv_int_priority_charge
+      data_type: int16
+      scale: 1
+      precision: 0
+      slave: 1
+      address: 1480
+      scan_interval: 15
+
+    # - name: pv_Protocol ID
     #   data_type: string
     #   slave: 1
     #   address: 992
     #   scan_interval: 15
-    - name: Effekta Inverter Modus
+    - name: pv_letter_inverter_state
       data_type: string
       slave: 1
       address: 208
-      scan_interval: 15
-    - name: Effekta Netzspannung
+      scan_interval: 5
+    - name: pv_grid_voltage
       unit_of_measurement: V
       data_type: int16
       scale: 0.1
@@ -28,7 +54,7 @@ modbus:
       slave: 1
       address: 209
       scan_interval: 15
-    - name: Effekta Netzfrequenz
+    - name: pv_grid_frequency
       unit_of_measurement: Hz
       data_type: int16
       scale: 0.1
@@ -36,7 +62,7 @@ modbus:
       slave: 1
       address: 213
       scan_interval: 15
-    - name: Effekta Ausgangsspannung
+    - name: pv_output_voltage
       unit_of_measurement: V
       data_type: int16
       scale: 0.1
@@ -44,15 +70,15 @@ modbus:
       slave: 1
       address: 216
       scan_interval: 15
-    - name: Effekta Ausgangsleistung
-      unit_of_measurement: kW
+    - name: pv_output_power
+      unit_of_measurement: W
       data_type: int32
-      scale: 0.001
-      precision: 3
+      scale: 1
+      precision: 0
       slave: 1
       address: 217
-      scan_interval: 15
-    - name: Effekta Ausgangsfrequenz
+      scan_interval: 5
+    - name: pv_output_frequency
       unit_of_measurement: Hz
       data_type: int16
       scale: 0.1
@@ -60,7 +86,7 @@ modbus:
       slave: 1
       address: 219
       scan_interval: 15
-    - name: Effekta Ausgangslast
+    - name: pv_output_load
       unit_of_measurement: "%"
       data_type: int16
       scale: 1
@@ -68,15 +94,15 @@ modbus:
       slave: 1
       address: 221
       scan_interval: 15
-    - name: Effekta PBUS Spannung
-      unit_of_measurement: V
-      data_type: int16
-      scale: 0.01
-      precision: 2
-      slave: 1
-      address: 222
-      scan_interval: 15
-    - name: Effekta Ausgangsscheinleistung
+    # - name: pv_pbus_voltage
+    #   unit_of_measurement: V
+    #   data_type: int16
+    #   scale: 0.01
+    #   precision: 2
+    #   slave: 1
+    #   address: 222
+    #   scan_interval: 15
+    - name: pv_output_apparent_power # Scheinleistung
       unit_of_measurement: kVA
       data_type: int32
       scale: 0.001
@@ -84,7 +110,7 @@ modbus:
       slave: 1
       address: 389
       scan_interval: 15
-    - name: Effekta Akku Spannung
+    - name: pv_battery_voltage
       unit_of_measurement: V
       data_type: int16
       scale: 0.01
@@ -92,7 +118,7 @@ modbus:
       slave: 1
       address: 224
       scan_interval: 15
-    - name: Effekta Akku Ladezustand
+    - name: pv_battery_level
       unit_of_measurement: "%"
       data_type: int16
       scale: 1
@@ -100,7 +126,7 @@ modbus:
       slave: 1
       address: 226
       scan_interval: 15
-    - name: Effekta Akku Ladestrom
+    - name: pv_battery_charge_current
       unit_of_measurement: A
       data_type: int16
       scale: 1
@@ -108,7 +134,7 @@ modbus:
       slave: 1
       address: 227
       scan_interval: 15
-    - name: Effekta PV Eingangsspannung
+    - name: pv_solar_voltage
       unit_of_measurement: V
       data_type: int16
       scale: 0.1
@@ -116,15 +142,15 @@ modbus:
       slave: 1
       address: 234
       scan_interval: 15
-    - name: Effekta PV Eingangsleistung
-      unit_of_measurement: kW
+    - name: pv_solar_power
+      unit_of_measurement: W
       data_type: int16
-      scale: 0.001
-      precision: 3
+      scale: 1
+      precision: 0
       slave: 1
       address: 785
-      scan_interval: 15
-    - name: Effekta PV Eingangsstrom
+      scan_interval: 5
+    - name: pv_solar_current
       unit_of_measurement: A
       data_type: int16
       scale: 1
@@ -132,7 +158,7 @@ modbus:
       slave: 1
       address: 295
       scan_interval: 15
-    - name: Effekta Akku Entladestrom
+    - name: pv_battery_discharge_current
       unit_of_measurement: A
       data_type: int32
       scale: 1
